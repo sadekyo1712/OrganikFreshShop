@@ -236,11 +236,11 @@ Nếu sử dụng Maven ( hướng dẫn trên intellJ idea 15 tuy nhiên cũng 
     </build>
 </project>
 
- - Step 5 : chờ thôi :) - thỉnh thoảng maven import rất lâu, cách 2 là build bằng tay ( clone project trên ) => để customize webserver và một số thư viện khác ( kiểu có thể tùy biến dùng Glassfish hoặc JBoss ..v.v )
-
+ - Step 5 : chờ thôi =)), thỉnh thoảng maven import rất lâu nhưng cứ kiên nhẫn chờ thôi hoặc có thể khởi động lại Maven.
+ 
 Hướng dẫn triển khai lên web server  : 
 -----------------------------------------------------------------------------------------------------------------------------
-- Deploy lên web server , export project ra file "OrganicFreshShop.war" rồi đặt vào webapps của Tomcat
+- Để deploy web lên Tomcat ( cũng tương tự cho các web server khác như Glassfish hay JBoss ), trước tiên export project trên ra file OrganicFreshShop.war rồi sao chép vào webapps của Tomcat.
 - Khởi động Tomcat  bằng lệnh : " user@user $ ~ /path/to/bin/Tomcat/../bin/catalina.sh start"
 - Nó hiện thế này là ok nhé ( có thể báo lỗi phân quyền nên cần change permission cho web server nhé ) : 
      ->Using CATALINA_BASE:   /root/Web Server/Apache Tomcat/apache-tomcat-9.0.0.M10
@@ -249,5 +249,4 @@ Hướng dẫn triển khai lên web server  :
      ->Using JRE_HOME:        /usr
      ->Using CLASSPATH:       /root/Web Server/Apache Tomcat/apache-tomcat-9.0.0.M10/bin/bootstrap.jar:/root/Web Server/Apache Tomcat/apache-tomcat-9.0.0.M10/bin/tomcat-juli.jar
      ->Tomcat started
-- Đường dẫn thay đổi theo localhost nhé ,bây giờ có thể test trên localhost qua URL : http://127.0.0.1:8080/OrganicFreshShop/index  => OK thế là xong việc build project để code và deploy thử nghiệm trên Tomcat.
-
+- Đường dẫn thay đổi theo localhost nhé ,bây giờ có thể test trên localhost qua URL : http://127.0.0.1:8080/OrganicFreshShop/index  => OK, Tomcat sẽ tự động đọc và extract file war và triển khai web lên port 8080 của nó. Vậy là xong việc build project để code và deploy thử nghiệm trên Tomcat. Goodluck !!!
