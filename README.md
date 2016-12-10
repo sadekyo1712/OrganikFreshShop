@@ -1,34 +1,39 @@
-OrganikFreshShop
+OrganikFreshShop.com
 -----------------------------------------------------------------------------------------------------------------------------
 Project demo website https://organikfreshshop.com cho đồ án môn học
 -----------------------------------------------------------------------------------------------------------------------------
 Nhóm sinh viên thực hiện :
 -----------------------------------------------------------------------------------------------------------------------------
+ - Bùi Đức Hưng
  - Nguyễn Viết Thành Sơn 
  - Đặng Trung Hiếu
  - Đỗ Đình Nam
  - Phạm Trung Tính
- - Bùi Đức Hưng
------------------------------------------------------------------------------------------------------------------------------
+ 
 Project sử dụng các frameworks sau : 
 -----------------------------------------------------------------------------------------------------------------------------
 - Spring-Security-3.2.5
 - Spring-MVC-4.3.4
 - Hibernate 5 & JPA 2.0
 - Spring-Core-4.3.4
------------------------------------------------------------------------------------------------------------------------------
+
 Một số thư viện mở rộng :
 -----------------------------------------------------------------------------------------------------------------------------
 - Apache-Common-Upload-1.3.1
 - Apache-Common-Validator-1.5.1
 - Mariadb-Java-Client-1.5.5
+
+Webserver và DBMS
 -----------------------------------------------------------------------------------------------------------------------------
 - DBMS : MariaDB 10.1.11
 - Webserver : Apache Tomcat 9
------------------------------------------------------------------------------------------------------------------------------
+
 Hướng dẫn build project : 
+-----------------------------------------------------------------------------------------------------------------------------
 - Project có thể build bằng tay hoặc sử dung Apache Maven 3.0.5 
-- Nếu sử dụng Maven : ( hướng dẫn trên intellJ idea 15 )
+- Nếu build bằng tay thì có thể chỉ cần clone Project này và open project trên IntellJ , IDE sẽ tự làm các công việc còn lại
+
+Nếu sử dụng Maven ( hướng dẫn trên intellJ idea 15 tuy nhiên cũng tương tự cho các IDE khác )
 -----------------------------------------------------------------------------------------------------------------------------
 - Step 1 : New Project -> Maven 
 - Step 2 : chọn org.apache.maven.archtype:maven-archtype-webapp
@@ -41,7 +46,7 @@ Hướng dẫn build project :
                      http://maven.apache.org/maven-v4_0_0.xsd">
  
     <modelVersion>4.0.0</modelVersion>
-    <groupId>org.organicFreshShop</groupId>
+    <groupId>com.organicFreshShop</groupId>
     <artifactId>OrganicFreshShop</artifactId>
     <packaging>war</packaging>
     <version>1.0.0</version>
@@ -232,14 +237,17 @@ Hướng dẫn build project :
 </project>
 
  - Step 5 : chờ thôi :) - thỉnh thoảng maven import rất lâu, cách 2 là build bằng tay ( clone project trên ) => để customize webserver và một số thư viện khác ( kiểu có thể tùy biến dùng Glassfish hoặc JBoss ..v.v )
-  -----------------------------------------------------------------------------------------------------------------------------
-    -Deploy lên web server , export project ra file "OrganicFreshShop.war" rồi đặt vào webapps của Tomcat , sau đó khởi động Tomcat  bằng lệnh : " user@user $ ~ /path/to/bin/Tomcat/../bin/catalina.sh start", nó hiện thế này là ok nhé ( có thể báo lỗi phân quyền nên cần change permission cho web server nhé ) :
-    -----------------------------------------------------------------------------------------------------------------------------
-    ->Using CATALINA_BASE:   /root/Web Server/Apache Tomcat/apache-tomcat-9.0.0.M10
-    ->Using CATALINA_HOME:   /root/Web Server/Apache Tomcat/apache-tomcat-9.0.0.M10
-    ->Using CATALINA_TMPDIR: /root/Web Server/Apache Tomcat/apache-tomcat-9.0.0.M10/temp
-    ->Using JRE_HOME:        /usr
-    ->Using CLASSPATH:       /root/Web Server/Apache Tomcat/apache-tomcat-9.0.0.M10/bin/bootstrap.jar:/root/Web Server/Apache Tomcat/apache-tomcat-9.0.0.M10/bin/tomcat-juli.jar
-    ->Tomcat started.
-    -----------------------------------------------------------------------------------------------------------------------------
-    -Đường dẫn thay đổi theo localhost nhé ,bây giờ có thể test trên localhost qua URL : http://127.0.0.1:8080/OrganicFreshShop/index => OK thế là xong việc build project để code và deploy thử nghiệm trên Tomcat.
+
+Hướng dẫn triển khai lên web server  : 
+-----------------------------------------------------------------------------------------------------------------------------
+- Deploy lên web server , export project ra file "OrganicFreshShop.war" rồi đặt vào webapps của Tomcat
+- Khởi động Tomcat  bằng lệnh : " user@user $ ~ /path/to/bin/Tomcat/../bin/catalina.sh start"
+- Nó hiện thế này là ok nhé ( có thể báo lỗi phân quyền nên cần change permission cho web server nhé ) : 
+     ->Using CATALINA_BASE:   /root/Web Server/Apache Tomcat/apache-tomcat-9.0.0.M10
+     ->Using CATALINA_HOME:   /root/Web Server/Apache Tomcat/apache-tomcat-9.0.0.M10
+     ->Using CATALINA_TMPDIR: /root/Web Server/Apache Tomcat/apache-tomcat-9.0.0.M10/temp
+     ->Using JRE_HOME:        /usr
+     ->Using CLASSPATH:       /root/Web Server/Apache Tomcat/apache-tomcat-9.0.0.M10/bin/bootstrap.jar:/root/Web Server/Apache Tomcat/apache-tomcat-9.0.0.M10/bin/tomcat-juli.jar
+     ->Tomcat started
+- Đường dẫn thay đổi theo localhost nhé ,bây giờ có thể test trên localhost qua URL : http://127.0.0.1:8080/OrganicFreshShop/index  => OK thế là xong việc build project để code và deploy thử nghiệm trên Tomcat.
+
