@@ -188,9 +188,9 @@ Hướng dẫn build project :
  
     </dependencies>
     
-  -step 5 : chờ thôi :) , thỉnh thoảng chạy rất lâu thì có thể chạy lại T.T, cách 2 là build bằng tay :), để customize webserver và một số thư viện khác ( kiểu có thể tùy biến dùng Glassfish hoặc JBoss ....... )
+  -step 5 : chờ thôi :) - thỉnh thoảng maven import rất lâu, cách 2 là build bằng tay ( clone project trên ) => để customize webserver và một số thư viện khác ( kiểu có thể tùy biến dùng Glassfish hoặc JBoss ..v.v )
   -----------------------------------------------------------------------------------------------------------------------------
-    -Deploy lên web server , export project ra file "OrganicFreshShop.war" rồi đặt vào webapps của Tomcat , sau đó khởi động Tomcat  bằng lệnh : " user@user $ ~ /path/to/bin/Tomcat/../bin/catalina.sh start", nó hiện thế này là ok nhé ( có thể báo lỗi nên cần cấp quyền lại cho web server nhé ):
+    -Deploy lên web server , export project ra file "OrganicFreshShop.war" rồi đặt vào webapps của Tomcat , sau đó khởi động Tomcat  bằng lệnh : " user@user $ ~ /path/to/bin/Tomcat/../bin/catalina.sh start", nó hiện thế này là ok nhé ( có thể báo lỗi nên cần chage permission cho web server nhé ) :
     -----------------------------------------------------------------------------------------------------------------------------
     ->Using CATALINA_BASE:   /root/Web Server/Apache Tomcat/apache-tomcat-9.0.0.M10
     ->Using CATALINA_HOME:   /root/Web Server/Apache Tomcat/apache-tomcat-9.0.0.M10
@@ -199,5 +199,4 @@ Hướng dẫn build project :
     ->Using CLASSPATH:       /root/Web Server/Apache Tomcat/apache-tomcat-9.0.0.M10/bin/bootstrap.jar:/root/Web Server/Apache Tomcat/apache-tomcat-9.0.0.M10/bin/tomcat-juli.jar
     ->Tomcat started.
     -----------------------------------------------------------------------------------------------------------------------------
-    -Đường dẫn thay đổi theo localhost nhé ,bây giờ có thể test trên localhost qua URL : "http://127.0.0.1:8080/OrganicFreshShop/index" =>OK thế là xong việc build để code và deploy thử nghiệm trên máy chủ
-    
+    -Đường dẫn thay đổi theo localhost nhé ,bây giờ có thể test trên localhost qua URL : http://127.0.0.1:8080/OrganicFreshShop/index => OK thế là xong việc build project để code và deploy thử nghiệm trên Tomcat.
