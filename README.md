@@ -14,6 +14,7 @@ Project sử dụng các frameworks sau :
 -----------------------------------------------------------------------------------------------------------------------------
 - Spring-Security-3.2.5
 - Spring-MVC-4.3.4
+- Hibernate 5 & JPA 2.0
 - Spring-Core-4.3.4
 -----------------------------------------------------------------------------------------------------------------------------
 Một số thư viện mở rộng :
@@ -32,7 +33,7 @@ Hướng dẫn build project :
 - Step 1 : New Project -> Maven 
 - Step 2 : chọn org.apache.maven.archtype:maven-archtype-webapp
 - Step 3 : set up group id và artifactid
-- Step 4 : set up các dependencies cho pom.xml như sau ( tốt nhất là chọn auto import cho Maven để intellJ tự import khi mình thêm các dependency ) :
+- Step 4 : set up các dependencies cho pom.xml như sau ( tốt nhất là chọn auto import cho Maven để intellJ tự import khi mình thêm các dependency, một số dependency trong này cũ hơn so với project thực tế nên mọi người có thể thay đổi version trong file pom.xml cho phù hợp nhé  ) :
 
     <dependencies>
  
