@@ -192,20 +192,12 @@ Hướng dẫn build project :
   -----------------------------------------------------------------------------------------------------------------------------
     -Deploy lên web server , export project ra war rồi đặt vào webapp của Tomcat và khởi động Tomcat  bằng lệnh : "user@user$: /path/to/bin/of/Tomcat/bin/catalina.sh start", nó hiện thế này là ok nhé ( có thể báo lỗi nên cần cấp quyền lại cho web server nhé ):
     -----------------------------------------------------------------------------------------------------------------------------
-    >Using CATALINA_BASE:   /root/Web Server/Apache Tomcat/apache-tomcat-9.0.0.M10
+    -Using CATALINA_BASE:   /root/Web Server/Apache Tomcat/apache-tomcat-9.0.0.M10
+    -Using CATALINA_HOME:   /root/Web Server/Apache Tomcat/apache-tomcat-9.0.0.M10
+    -Using CATALINA_TMPDIR: /root/Web Server/Apache Tomcat/apache-tomcat-9.0.0.M10/temp
+    -Using JRE_HOME:        /usr
+    -Using CLASSPATH:       /root/Web Server/Apache Tomcat/apache-tomcat-9.0.0.M10/bin/bootstrap.jar:/root/Web Server/Apache Tomcat/apache-tomcat-9.0.0.M10/bin/tomcat-juli.jar
+    -Tomcat started.
     -----------------------------------------------------------------------------------------------------------------------------
-    >Using CATALINA_HOME:   /root/Web Server/Apache Tomcat/apache-tomcat-9.0.0.M10
-    -----------------------------------------------------------------------------------------------------------------------------
-    >Using CATALINA_TMPDIR: /root/Web Server/Apache Tomcat/apache-tomcat-9.0.0.M10/temp
-    -----------------------------------------------------------------------------------------------------------------------------
-    >Using JRE_HOME:        /usr
-    -----------------------------------------------------------------------------------------------------------------------------
-    >Using CLASSPATH:       /root/Web Server/Apache Tomcat/apache-tomcat-9.0.0.M10/bin/bootstrap.jar:/root/Web Server/Apache Tomcat/apache-tomcat-9.0.0.M10/bin/tomcat-juli.jar
-    -----------------------------------------------------------------------------------------------------------------------------
-    >Tomcat started.
-    -----------------------------------------------------------------------------------------------------------------------------
-    -Đường dẫn thay đổi theo localhost nhé
-    -Bây giờ có thể test trên localhost qua URL : "http://127.0.0.1:8080/OrganicFreshShop/index" 
-    =>OK thế là xong việc build để code và deploy thử nghiệm trên máy chủ
-    -----------------------------------------------------------------------------------------------------------------------------
+    -Đường dẫn thay đổi theo localhost nhé ,bây giờ có thể test trên localhost qua URL : "http://127.0.0.1:8080/OrganicFreshShop/index" =>OK thế là xong việc build để code và deploy thử nghiệm trên máy chủ
     
