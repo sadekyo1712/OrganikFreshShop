@@ -33,7 +33,7 @@ Hướng dẫn build project :
 - Step 1 : New Project -> Maven 
 - Step 2 : chọn org.apache.maven.archtype:maven-archtype-webapp
 - Step 3 : set up group id và artifactid
-- Step 4 : set up các dependencies cho pom.xml như sau ( tốt nhất là chọn auto import cho Maven để intellJ tự import khi mình thêm các dependency, mình đã update lại file pom.xml rồi nhé ) :
+- Step 4 : set up các dependencies cho pom.xml như sau ( tốt nhất là chọn auto import cho Maven để intellJ tự import khi mình thêm các dependency, version của một số thư viện và framework có thể cũ hơn so với project thực tế nên mọi người có thể thay đổi lại version trong file pom.xml nhé ) :
 
 <project xmlns="http://maven.apache.org/POM/4.0.0"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -41,11 +41,11 @@ Hướng dẫn build project :
                      http://maven.apache.org/maven-v4_0_0.xsd">
  
     <modelVersion>4.0.0</modelVersion>
-    <groupId>org.o7planning</groupId>
-    <artifactId>SpringMVCAnnotationShoppingCart</artifactId>
+    <groupId>org.organicFreshShop</groupId>
+    <artifactId>OrganicFreshShop</artifactId>
     <packaging>war</packaging>
     <version>1.0.0</version>
-    <name>SpringMVCAnnotationShoppingCart Maven Webapp</name>
+    <name>OrganicFreshShop Maven Webapp</name>
     <url>http://maven.apache.org</url>
  
  
@@ -217,7 +217,7 @@ Hướng dẫn build project :
  
  
     <build>
-        <finalName>SpringMVCAnnotationShoppingCart</finalName>
+        <finalName>OrganicFreshShop</finalName>
         <plugins>
  
             <!-- Config: Maven Tomcat Plugin -->
@@ -226,15 +226,12 @@ Hướng dẫn build project :
                 <groupId>org.apache.tomcat.maven</groupId>
                 <artifactId>tomcat7-maven-plugin</artifactId>
                 <version>2.2</version>
-                <!-- Config: contextPath and Port (Default - /SpringMVCAnnotationShoppingCart
-                    : 8080) -->
-                <!-- <configuration> <path>/</path> <port>8899</port> </configuration> -->
             </plugin>
         </plugins>
     </build>
 </project>
-    
-  - step 5 : chờ thôi :) - thỉnh thoảng maven import rất lâu, cách 2 là build bằng tay ( clone project trên ) => để customize webserver và một số thư viện khác ( kiểu có thể tùy biến dùng Glassfish hoặc JBoss ..v.v )
+
+ - Step 5 : chờ thôi :) - thỉnh thoảng maven import rất lâu, cách 2 là build bằng tay ( clone project trên ) => để customize webserver và một số thư viện khác ( kiểu có thể tùy biến dùng Glassfish hoặc JBoss ..v.v )
   -----------------------------------------------------------------------------------------------------------------------------
     -Deploy lên web server , export project ra file "OrganicFreshShop.war" rồi đặt vào webapps của Tomcat , sau đó khởi động Tomcat  bằng lệnh : " user@user $ ~ /path/to/bin/Tomcat/../bin/catalina.sh start", nó hiện thế này là ok nhé ( có thể báo lỗi phân quyền nên cần change permission cho web server nhé ) :
     -----------------------------------------------------------------------------------------------------------------------------
