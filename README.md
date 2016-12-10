@@ -182,8 +182,7 @@ $ Step 4 : set up các dependencies cho pom.xml như sau
  
     </dependencies>
     
-  $ Step 5 : chờ thôi :) , thỉnh thoảng chạy rất lâu thì có thể chạy lại T.T....
-  Cách 2 là build bằng tay :) , để customize webserver và một số thư viện khác ( kiểu có thể tùy biến dùng Glassfish hoặc JBoss ....... )
+  $ Step 5 : chờ thôi :) , thỉnh thoảng chạy rất lâu thì có thể chạy lại T.T, cách 2 là build bằng tay :), để customize webserver và một số thư viện khác ( kiểu có thể tùy biến dùng Glassfish hoặc JBoss ....... )
     -----------------------------------------------------------------------------------------------------------------------------------------------------------
     -Deploy lên web server , export project ra war rồi đặt vào webapp của Tomcat và khởi động Tomcat  bằng lệnh : "user@user$: /path/to/bin/of/Tomcat/bin/catalina.sh start"
     -Nó hiện thế này là ok nhé : ( có thể báo lỗi nên cần cấp quyền lại cho web server nhé )
