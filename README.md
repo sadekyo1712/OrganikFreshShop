@@ -1,22 +1,21 @@
->>ĐÂY LÀ PROJECT THỬ NGHIỆM MỘT WEBSITE BÁN THỰC PHẨM HỮU CƠ VIẾT BẰNG JAVA
->>NHÓM SINH VIÊN THỰC HIỆN  :
- -Bùi Đức Hưng
- -Nguyễn Viết Thành Sơn 
- -Đặng Trung Hiếu
- -Đỗ Đình Nam
- -Phạm Trung Tính
->>PROJECT DEMO VẪN KHÔNG TRÁNH ĐƯỢC BUG, REPORT ĐỂ CHÚNG TÔI CÓ THỂ FIX KỊP THỜI , THANKS !!!!!!!
+ĐÂY LÀ PROJECT THỬ NGHIỆM MỘT WEBSITE BÁN THỰC PHẨM HỮU CƠ VIẾT BẰNG JAVA
+NHÓM SINH VIÊN THỰC HIỆN  :
+ 1.Bùi Đức Hưng
+ 2.Nguyễn Viết Thành Sơn 
+ 3.Đặng Trung Hiếu
+ 4.Đỗ Đình Nam
+ 5.Phạm Trung Tính
+PROJECT DEMO VẪN KHÔNG TRÁNH ĐƯỢC BUG, REPORT ĐỂ CHÚNG TÔI CÓ THỂ FIX KỊP THỜI , THANKS !!!!!!!
 -----------------------------------------------------------------------------------------------------------------------------
 Project sử dụng framework sau : 
--Spring core 4.3.4
--Spring security 3.2.5
--Spring MVC 4.3.4
--Hibernate 5.2.3 & JPA 2.0
+-spring-4.3.4
+-spring-security-3.2.5
+-spring-mvc-4.3.4
 -----------------------------------------------------------------------------------------------------------------------------
 Một số thư viện mở rộng :
--Apache common file upload 1.3.1
--Apache common validator 1.5.1
--Driver for maria db 1.5.5 
+-apache-common-upload-1.3.1
+-apache-common-validator-1.5.1
+-mariadb-java-client-1.5.5 1.5.5 
 -----------------------------------------------------------------------------------------------------------------------------
 -Webserver : apache Tomcat 9 / 8.5.5 
 -DBMS : MariaDB 10.1.11 làm RDBMS
