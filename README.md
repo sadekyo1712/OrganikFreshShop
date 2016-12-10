@@ -1,36 +1,34 @@
 ====>>>>>    ĐÂY LÀ PROJECT THỬ NGHIỆM MỘT WEBSITE BÁN THỰC PHẨM HỮU CƠ SỬ DỤNG CÔNG NGHỆ CỦA JAVA       <<<<<====
 ====>>>>>                                                               NHÓM SINH VIÊN THỰC HIỆN  :                                                                                          <<<<<====
-  ####################
-  #   Bùi Đức Hưng                        #
-  #   Nguyễn Viết Thành Sơn        #
-  #   Đặng Trung Hiếu		                #	
-  #   Đỗ Đình Nam                        #
-  #   Phạm Trung Tính                   #
-  #   ---- BKHN @ 12-2016 ----  #
-  ####################
+ -Bùi Đức Hưng
+ -Nguyễn Viết Thành Sơn 
+ -Đặng Trung Hiếu
+ -Đỗ Đình Nam
+ -Phạm Trung Tính
+
   ====>>>>>  PROJECT DEMO VẪN KHÔNG TRÁNH ĐƯỢC BUG, REPORT ĐỂ CHÚNG TÔI CÓ THỂ FIX KỊP THỜI , THANKS !!!!!!! <<<<<==== 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------
 Project sử dụng framework sau : 
-- Spring core 4.3.4 , Spring security 3.2.5, Spring MVC 4.3.4
-- Hibernate 5.2.3 & JPA 2.0
---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-Spring core 4.3.4 , Spring security 3.2.5, Spring MVC 4.3.4
+-Hibernate 5.2.3 & JPA 2.0
+--------------------------------------------------------------------------------------------------------------------------------------------------------------
 Một số thư viện mở rộng :
--  Apache common file upload 1.3.1
--  Apache common validator 1.5.1
--  Driver for maria db 1.5.5 
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-Webserver : apache Tomcat 9 / 8.5.5 
-DBMS : MariaDB 10.1.11 làm RDBMS
--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-Apache common file upload 1.3.1
+-Apache common validator 1.5.1
+-Driver for maria db 1.5.5 
+-------------------------------------------------------------------------------------------------------------------------------------------------------------
+-Webserver : apache Tomcat 9 / 8.5.5 
+-DBMS : MariaDB 10.1.11 làm RDBMS
+--------------------------------------------------------------------------------------------------------------------------------------------------------
 Hướng dẫn build project : 
 - Project có thể build bằng tay hoặc sử dung Apache Maven 3.0.5 
 - Nếu sử dụng Maven : ( hướng dẫn trên intellJ idea 15 )
-# Step 1 : New Project -> Maven 
-# Step 2 : chọn org.apache.maven.archtype:maven-archtype-webapp
-# Step 3 : set up group id và artifactid
-# Step 4 : set up các dependencies cho pom.xml như sau
+$ Step 1 : New Project -> Maven 
+$ Step 2 : chọn org.apache.maven.archtype:maven-archtype-webapp
+$ Step 3 : set up group id và artifactid
+$ Step 4 : set up các dependencies cho pom.xml như sau
 ( tốt nhất là chọn auto import cho Maven để intellJ tự import khi mình thêm các dependency ):
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
     <dependencies>
  
         <dependency>
@@ -184,25 +182,24 @@ Hướng dẫn build project :
         </dependency>
  
     </dependencies>
-    @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-    # Step 5 : chờ thôi :) , thỉnh thoảng chạy rất lâu thì có thể chạy lại T.T....
-    >>>>>>>>>>>>>>>>>>> Done !!!!!<<<<<<<<<<<<<<<<<<<<<<<<
-    @@@@@@@ Cách 2 là build bằng tay :) , để customize webserver và một số thư viện khác ( kiểu có thể tùy biến dùng Glassfish hoặc JBoss ....... )@@@@@@@@@
-    ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     
-    Deploy lên web server , export project ra war rồi đặt vào webapp của Tomcat và khởi động Tomcat 
-    bằng lệnh : "user@user$: /path/to/bin/of/Tomcat/bin/catalina.sh start"
-    nó hiện thế này là ok nhé : ( có thể báo lỗi nên cần cấp quyền lại cho web server nhé )
-    ##################################################################################################################
+  $ Step 5 : chờ thôi :) , thỉnh thoảng chạy rất lâu thì có thể chạy lại T.T....
+  Cách 2 là build bằng tay :) , để customize webserver và một số thư viện khác ( kiểu có thể tùy biến dùng Glassfish hoặc JBoss ....... )
+    -----------------------------------------------------------------------------------------------------------------------------------------------------------
+    -Deploy lên web server , export project ra war rồi đặt vào webapp của Tomcat và khởi động Tomcat  bằng lệnh : "user@user$: /path/to/bin/of/Tomcat/bin/catalina.sh start"
+    -Nó hiện thế này là ok nhé : ( có thể báo lỗi nên cần cấp quyền lại cho web server nhé )
+    
+    ####################################################################################################
     Using CATALINA_BASE:   /root/Web Server/Apache Tomcat/apache-tomcat-9.0.0.M10
     Using CATALINA_HOME:   /root/Web Server/Apache Tomcat/apache-tomcat-9.0.0.M10
     Using CATALINA_TMPDIR: /root/Web Server/Apache Tomcat/apache-tomcat-9.0.0.M10/temp
     Using JRE_HOME:        /usr
     Using CLASSPATH:       /root/Web Server/Apache Tomcat/apache-tomcat-9.0.0.M10/bin/bootstrap.jar:/root/Web Server/Apache Tomcat/apache-tomcat-9.0.0.M10/bin/tomcat-juli.jar
     Tomcat started.
-    ##################################################################################################################
-    <Đường dẫn thay đổi theo localhost nhé :)~ >
-    Bây giờ có thể test trên localhost qua URL : "http://127.0.0.1:8080/OrganicFreshShop/index" => OK thế là xong việc build để code và deploy thử nghiệm trên máy chủ
+    #####################################################################################################
     
-    --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    -Đường dẫn thay đổi theo localhost nhé
+    -Bây giờ có thể test trên localhost qua URL : "http://127.0.0.1:8080/OrganicFreshShop/index" => OK thế là xong việc build để code và deploy thử nghiệm trên máy chủ
+    
+    ---------------------------------------------------------------------------------------------------------------------------------------------------------------
     
