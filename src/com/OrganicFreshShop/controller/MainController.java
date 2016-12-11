@@ -70,6 +70,13 @@ public class MainController {
         return "index";
     }
 
+    @RequestMapping( value = "/error")
+    public String error( ModelMap modelMap, HttpServletRequest request ) {
+        System.out.println("In error page");
+        modelMap.addAttribute( "cartForm", Utils.getCartInSession( request ) );
+        return "error";
+    }
+
     @RequestMapping( value = "/intro")
     public String introductionToNewFunction( HttpServletRequest request, ModelMap modelMap ) {
         System.out.println("New fuction page");
@@ -78,10 +85,17 @@ public class MainController {
     }
 
     @RequestMapping( value = "/404")
-    public String accessDenied( HttpServletRequest request, ModelMap modelMap ) {
+    public String pageNotFound( HttpServletRequest request, ModelMap modelMap ) {
         System.out.println("404 page - Page not found!");
         modelMap.addAttribute( "cartForm", Utils.getCartInSession( request ) );
         return "404";
+    }
+
+    @RequestMapping( value = "/403")
+    public String accessDenied( HttpServletRequest request, ModelMap modelMap ) {
+        System.out.println("404 page - Page not found!");
+        modelMap.addAttribute( "cartForm", Utils.getCartInSession( request ) );
+        return "403";
     }
 
     @RequestMapping( value = "/about")
@@ -176,6 +190,37 @@ public class MainController {
         modelMap.addAttribute( "cartForm", Utils.getCartInSession( request ) );
         System.out.println("Product list : " + result + "\n\n");
         return "product_list";
+    }
+
+    @RequestMapping( value = "/create_product", method = RequestMethod.GET )
+    public String createProduct( ModelMap modelMap,
+                                 HttpServletRequest request) {
+
+        modelMap.addAttribute( "productForm", new Product() );
+        modelMap.addAttribute( "cartForm", Utils.getCartInSession( request ) );
+        System.out.println("In create_product HTTP_GET page");
+        return "create_product";
+    }
+
+    @RequestMapping( value = "/create_product", method = RequestMethod.POST )
+    public String createProduct( ModelMap modelMap, HttpServletRequest request,
+                                 @ModelAttribute( "productForm" ) @Validated Product product,
+                                 BindingResult bindingResult ) {
+        if ( bindingResult.hasErrors() ) {
+            System.out.println("Error when binding result");
+            return "redirect:/create_product";
+        }
+        try {
+            productDAOImplement.saveProduct( product );
+        } catch ( Exception ex ) {
+            System.out.println("Error when save product in product_admin HTTP_POST");
+            ex.printStackTrace();
+            modelMap.addAttribute("message", ex.getMessage() );
+            return "redirect:/create_product";
+        }
+        modelMap.addAttribute( "cartForm", Utils.getCartInSession( request ) );
+        System.out.println("In create_product HTTP_POST and is redirecting to product_list");
+        return "redirect:/product_list";
     }
 
     @RequestMapping( value = "/buy_product")

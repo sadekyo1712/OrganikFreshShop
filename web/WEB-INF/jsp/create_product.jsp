@@ -19,14 +19,12 @@
 <div class="single_top">
     <div class="container">
         <div class="register">
-            <form:form name="product_admin" action="${pageContext.request.contextPath}/product_admin"
+            <form:form name="create_product" action="${pageContext.request.contextPath}/create_product"
                        method="post" modelAttribute="productForm">
                 <div class="register-top-grid">
-                    <h3>CẬP NHẬT THÔNG TIN SẢN PHẨM</h3>
+                    <h3>TẠO SẢN PHẨM MỚI</h3>
                     <c:if test="${not empty message }">
-                        <div>
-                            ${message}
-                        </div>
+                        <div>${message}</div>
                     </c:if>
 
                     <div>
@@ -93,7 +91,7 @@
                 </div>
                 <div class="clearfix"></div>
                 <div class="register-but">
-                    <input type="submit" value="Lưu thông tin sản phẩm"/>
+                    <input type="submit" value="Tạo sản phẩm mới"/>
                     <input type="reset" value="Reset"/>
                     <div class="clearfix"></div>
                 </div>

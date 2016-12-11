@@ -27,9 +27,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         httpSecurity.csrf().disable();
 
-        httpSecurity.authorizeRequests().antMatchers("/order_list" , "/order", "/account_info" )
+        httpSecurity.authorizeRequests().antMatchers("/account_info")
+                .access("hasAnyRole('ROLE_EMPLOYEE','ROLE_MANAGER','ROLE_USER','ROLE_SUPPLIER')");
+        httpSecurity.authorizeRequests().antMatchers("/create_product")
+                .access("hasAnyRole('ROLE_MANAGER','ROLE_SUPPLIER')");
+        httpSecurity.authorizeRequests().antMatchers("/order_list", "/order")
                 .access("hasAnyRole('ROLE_EMPLOYEE','ROLE_MANAGER')");
-
         httpSecurity.authorizeRequests().antMatchers("/product_admin")
                 .access("hasRole('ROLE_MANAGER')");
 

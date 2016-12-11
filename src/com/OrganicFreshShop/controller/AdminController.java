@@ -92,7 +92,7 @@ public class AdminController {
 
     @RequestMapping( value = "/product_admin", method = RequestMethod.GET )
     public String product( ModelMap modelMap, HttpServletRequest request,
-                           @RequestParam( value = "code", defaultValue = "")String code ) {
+                           @RequestParam( value = "code", defaultValue = "S1")String code ) {
         Product product = null;
         if ( code != null && code.length() > 0 )
             product = productDAOImplement.fetchProduct( code );
@@ -111,7 +111,7 @@ public class AdminController {
                                BindingResult bindingResult ) {
         if ( bindingResult.hasErrors() ) {
             System.out.println("Error when binding result");
-            return "product_admin";
+//            return "redirect:/error";
         }
         try {
             productDAOImplement.saveProduct( product );
@@ -119,7 +119,7 @@ public class AdminController {
             System.out.println("Error when save product in product_admin HTTP_POST");
             ex.printStackTrace();
             modelMap.addAttribute("message", ex.getMessage() );
-            return "product_admin";
+            return "redirect:/product_admin";
         }
         modelMap.addAttribute( "cartForm", Utils.getCartInSession( request ) );
         System.out.println("In product_admin HTTP_POST and is redirecting to product_list");

@@ -73,14 +73,26 @@
             </ul>
             <ul>
                 <security:authorize access="hasAnyRole('ROLE_MANAGER','ROLE_EMPLOYEE')">
+                    Dành cho Người quản lý và Nhân viên
                     <li>
                         <a href="${pageContext.request.contextPath}/order_list">Danh sách hóa đơn</a>&nbsp;&nbsp;|&nbsp;
                     </li>
                 </security:authorize>
-
                 <security:authorize access="hasAnyRole('ROLE_MANAGER')">
                     <li>
-                        <a href="${pageContext.request.contextPath}/product_admin">Tạo sản phẩm mới</a>&nbsp;&nbsp;|&nbsp;
+                        <a href="${pageContext.request.contextPath}/product_admin">Sửa thông tin sản phẩm</a>&nbsp;&nbsp;|&nbsp;
+                    </li>
+                </security:authorize>
+                <security:authorize access="hasAnyRole('ROLE_MANAGER')">
+                    <li>
+                        <a href="${pageContext.request.contextPath}/create_product">Tạo sản phẩm mới</a>&nbsp;&nbsp;|&nbsp;
+                    </li>
+                </security:authorize>
+                <security:authorize access="hasAnyRole('ROLE_SUPPLIER')">
+                    Dành cho Nhà cung cấp
+                    <li>
+                        Nhà cung cấp :
+                        <a href="${pageContext.request.contextPath}/create_product"> thêm sản phẩm mới</a>&nbsp;&nbsp;|&nbsp;
                     </li>
                 </security:authorize>
             </ul>

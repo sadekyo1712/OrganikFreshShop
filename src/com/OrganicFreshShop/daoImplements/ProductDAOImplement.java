@@ -9,10 +9,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 
 import javax.sql.DataSource;
 import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 /**
  * Created by root on 11/22/16.
@@ -166,16 +163,16 @@ public class ProductDAOImplement implements ProductDAO {
                 String SQL_INSERT_NEW_PRODUCT =
                         "insert into Products( Code, Create_Date, Image, Name, Price, Description, URI ) " +
                         "values ( ?, ?, ?, ?, ?, ?, ? )";
-                jdbcTemplate.update( SQL_INSERT_NEW_PRODUCT, product.getCode(), product.getCreatedDate(),
+                jdbcTemplate.update( SQL_INSERT_NEW_PRODUCT, UUID.randomUUID().toString(), new Date(),
                         product.getData(), product.getName(), product.getPriceTag(),
                         product.getDescription(), product.getUri() );
                 System.out.println( "Save product : " + product +" successfully ! " );
             } else {
                 String SQL_UPDATE_PRODUCT =
                         "update Products " +
-                        "set Image = ?, Name = ?, Price = ?, Description = ?, URI = ? " +
+                        "set Create_Date = ?, Image = ?, Name = ?, Price = ?, Description = ?, URI = ? " +
                         "where Code = ?";
-                jdbcTemplate.update( SQL_UPDATE_PRODUCT, product.getData(), product.getName(),
+                jdbcTemplate.update( SQL_UPDATE_PRODUCT, new Date(), product.getData(), product.getName(),
                         product.getPriceTag(), product.getDescription(), product.getUri(), code);
                 System.out.println( "Update product : " + product +" successfully ! " );
             }
