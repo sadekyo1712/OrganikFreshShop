@@ -20,7 +20,7 @@
 <div class="container">
     <div class="check">
         <div class="col-md-9 cart-items">
-            <h1>Rỏ hàng của tôi</h1>
+            <h1>Giỏ hàng của tôi</h1>
             
             <c:if test="${ empty cartForm.cartEntriesProducts }">
                 <div class="cart-header">
