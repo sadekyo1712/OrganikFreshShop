@@ -22,6 +22,7 @@ Một số thư viện mở rộng :
 - Apache-Common-Upload-1.3.1
 - Apache-Common-Validator-1.5.1
 - Mariadb-Java-Client-1.5.5
+- JSTL & JSP tag lib ( support for JSP )
 
 Webserver và DBMS
 -----------------------------------------------------------------------------------------------------------------------------
