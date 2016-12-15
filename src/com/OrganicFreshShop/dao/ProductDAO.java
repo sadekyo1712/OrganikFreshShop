@@ -15,7 +15,10 @@ public interface ProductDAO {
                                                       int maxNavigationPage );
     public PaginatorResult<Product> findAllProductMatchNamePatternPaginatorResult( int page, int resultEachPage,
                                                                     int maxNavigationPage, String likeName);
+    public PaginatorResult<Product> fetchAllProductsCreatedByAccountPaginatorResult
+            ( int page, int resultEachPage, int maxNavigationPage, String createAccount );
     public List<Product> fetchAllProducts();
     public List<Product>  findAllProductMatchNamePattern( String likeName );
-    public void saveProduct( Product product );
+    public boolean saveProduct( Product product );
+    public boolean deleteProduct( Product product );
 }

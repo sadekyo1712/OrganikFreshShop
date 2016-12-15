@@ -143,6 +143,7 @@ public class Cart {
 
     @Override
     public String toString() {
-        return "[ Cart : " + this.orderNum + " ," + this.customer + " ," + this.cartEntriesProducts + " ]" ;
+        return "[ Cart : " + "order number : " + this.orderNum + " , custome : " + this.customer +
+                " , cart detail : " + this.cartEntriesProducts + " ]" ;
     }
 }

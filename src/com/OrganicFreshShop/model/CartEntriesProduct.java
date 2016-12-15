@@ -34,6 +34,7 @@ public class CartEntriesProduct {
 
     @Override
     public String toString() {
-        return "[ Cart Entries Product : " + this.product + " ," + this.quantity + " ]";
+        return "[ Cart Entries Product : " + " product info : " + this.product +
+                " , quantity : " + this.quantity + " ]";
     }
 }

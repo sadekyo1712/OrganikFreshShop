@@ -14,10 +14,10 @@
 
 <jsp:include page="header.jsp"/>
 
-<div class="single_top">
+<div class="single_top_error">
     <div class="container">
         <div class="error-404 text-center">
-            <h1>ERROR</h1>
+            <h6>___________________</h6>
             <p>Đã có lỗi xảy ra</p>
             <a class="b-home" href="${pageContext.request.contextPath}/index">Quay lại trang chủ nhé :)</a>
         </div>

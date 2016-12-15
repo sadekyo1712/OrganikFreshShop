@@ -12,7 +12,7 @@
   </head>
   <body>
   <h1>
-    Nếu thấy trang này nghĩa là web server đã được cấu hình chính xác và chạy ổ định
+    Nếu thấy trang này nghĩa là web server đã được cấu hình chính xác và chạy ổn định
   </h1>
   <h2>Click vào đây để truy cập vào trang chủ của OrganikFreshShop</h2>
   <form action="${pageContext.request.contextPath}/index" method="get" class="hidden">

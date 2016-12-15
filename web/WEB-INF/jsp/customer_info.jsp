@@ -23,22 +23,22 @@
                     <h3>NHẬP THÔNG TIN KHÁCH HÀNG</h3>
                     <div>
                         <span>Tên khách hàng<label>*</label></span>
-                        <form:input path="name"/>
+                        <form:input path="name" required="true"/>
                         <form:errors path="name" cssClass="error-message"/>
                     </div>
                     <div>
                         <span>Số điện thoại<label>*</label></span>
-                        <form:input path="phone"/>
+                        <form:input path="phone" required="true"/>
                         <form:errors path="phone" cssClass="error-message"/>
                     </div>
                     <div>
                         <span>Địa chỉ<label>*</label></span>
-                        <form:input path="address"/>
+                        <form:input path="address" required="true"/>
                         <form:errors path="address" cssClass="error-message"/>
                     </div>
                     <div>
                         <span>Email<label>*</label></span>
-                        <form:input path="email"/>
+                        <form:input path="email" type="email" required="true"/>
                         <form:errors path="email" cssClass="error-message"/>
                     </div>
                     <div class="clearfix"></div>

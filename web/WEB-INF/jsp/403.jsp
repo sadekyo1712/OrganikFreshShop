@@ -14,10 +14,10 @@
 
 <jsp:include page="header.jsp"/>
 
-<div class="single_top">
+<div class="single_top_403">
     <div class="container">
         <div class="error-404 text-center">
-            <h1>403 ERROR !</h1>
+            <h6>____________________________</h6>
             <p>Ban không thể truy cập trang này</p>
             <a class="b-home" href="${pageContext.request.contextPath}/index">Quay lại trang chủ nhé :)</a>
         </div>

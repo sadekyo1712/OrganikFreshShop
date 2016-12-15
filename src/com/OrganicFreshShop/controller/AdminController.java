@@ -1,11 +1,9 @@
 package com.OrganicFreshShop.controller;
 
+import com.OrganicFreshShop.daoImplements.AccountDAOImplement;
 import com.OrganicFreshShop.daoImplements.OrderDAOImplement;
 import com.OrganicFreshShop.daoImplements.ProductDAOImplement;
-import com.OrganicFreshShop.model.Order;
-import com.OrganicFreshShop.model.OrderDetail;
-import com.OrganicFreshShop.model.PaginatorResult;
-import com.OrganicFreshShop.model.Product;
+import com.OrganicFreshShop.model.*;
 import com.OrganicFreshShop.util.Utils;
 import com.OrganicFreshShop.validator.ProductValidator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +25,9 @@ import javax.servlet.http.HttpServletRequest;
  */
 @Controller
 public class AdminController {
+
+    @Autowired
+    private AccountDAOImplement accountDAOImplement;
 
     @Autowired
     private OrderDAOImplement orderDAOImplement;
@@ -69,6 +70,35 @@ public class AdminController {
         return "account_info";
     }
 
+    @RequestMapping( value = "/account_change_info", method = RequestMethod.GET )
+    public String accountChangeInfo( ModelMap modelMap, HttpServletRequest request,
+                                     @RequestParam( value = "user_name") String userName ) {
+        Account account = accountDAOImplement.fetchAccount( userName );
+        System.out.println( account );
+//        account.setUserRole( null );
+        modelMap.addAttribute( "account", account );
+        modelMap.addAttribute( "cartForm", Utils.getCartInSession( request ) );
+        System.out.println("In account change info HTTP_GET");
+        return "account_change_info";
+    }
+
+    @RequestMapping( value = "/account_change_info", method = RequestMethod.POST )
+    public String saveAccountChange( ModelMap modelMap, HttpServletRequest request,
+                                     @ModelAttribute( "account" ) Account account ) {
+        try {
+            accountDAOImplement.updateAccount( account );
+        } catch ( Exception ex ) {
+            System.out.println( "Error when save account change info" );
+            ex.printStackTrace();
+            return "redirect:/account_change_info";
+        }
+        System.out.println( account );
+        modelMap.addAttribute( "cartForm", Utils.getCartInSession( request ) );
+        System.out.println("In account_change_info HTTP_POST and is redirecting to home page.....");
+//        return "redirect:/logout";
+        return "successful";
+    }
+
     @RequestMapping( value = "/order_list", method = RequestMethod.GET )
     public String orderList( ModelMap modelMap, HttpServletRequest request,
                              @RequestParam( value = "page", defaultValue = "1") String pageString ) {
@@ -78,7 +108,7 @@ public class AdminController {
         } catch ( Exception ex ) {
             System.out.println("Error when cast page number in order_list and is redirecting to index.........");
             ex.printStackTrace();
-            return "redirect:/index";
+            return "error";
         }
         final int maxResult = 7;
         final int maxNavigationPage = 10;
@@ -90,15 +120,39 @@ public class AdminController {
         return "order_list";
     }
 
+    @RequestMapping( value = "/supplier_product_list")
+    public String listProduct( ModelMap modelMap, HttpServletRequest request,
+                               @RequestParam( value = "name", defaultValue = "") String searchName,
+                               @RequestParam( value = "page", defaultValue = "1") int page,
+                               @RequestParam( value = "user_name") String username ) {
+
+        final int maxResult = 12;
+        final int maxNavigationPage = 6;
+        PaginatorResult<Product> result = productDAOImplement.
+                fetchAllProductsCreatedByAccountPaginatorResult( page, maxResult, maxNavigationPage, username);
+        int totalProduct = result.getTotalRecord();
+        if ( totalProduct == 0 ) {
+            modelMap.addAttribute( "cartForm", Utils.getCartInSession( request ) );
+            return "empty";
+        }
+        modelMap.addAttribute( "paginatorProduct", result );
+        modelMap.addAttribute( "totalProduct", totalProduct );
+        modelMap.addAttribute( "cartForm", Utils.getCartInSession( request ) );
+        System.out.println("Product list : " + result + "\n\n");
+        return "supplier_product_list";
+    }
+
     @RequestMapping( value = "/product_admin", method = RequestMethod.GET )
     public String product( ModelMap modelMap, HttpServletRequest request,
-                           @RequestParam( value = "code", defaultValue = "S1")String code ) {
+                           @RequestParam( value = "code", defaultValue = "S1")String code,
+                           @RequestParam( value = "user_name") String username) {
         Product product = null;
         if ( code != null && code.length() > 0 )
             product = productDAOImplement.fetchProduct( code );
         if ( product == null ) {
             product = new Product();
         }
+        modelMap.addAttribute( "user_name", username );
         modelMap.addAttribute( "productForm", product );
         modelMap.addAttribute( "cartForm", Utils.getCartInSession( request ) );
         System.out.println("In product_admin HTTP_GET page");
@@ -107,6 +161,7 @@ public class AdminController {
 
     @RequestMapping( value = "/product_admin", method = RequestMethod.POST )
     public String productSave( ModelMap modelMap, HttpServletRequest request,
+                               @RequestParam( value = "user_name" ) String user_name,
                                @ModelAttribute( "productForm" ) @Validated Product product,
                                BindingResult bindingResult ) {
         if ( bindingResult.hasErrors() ) {
@@ -123,7 +178,7 @@ public class AdminController {
         }
         modelMap.addAttribute( "cartForm", Utils.getCartInSession( request ) );
         System.out.println("In product_admin HTTP_POST and is redirecting to product_list");
-        return "redirect:/product_list";
+        return "redirect:/supplier_product_list?user_name=" + user_name ;
     }
 
     @RequestMapping( value = "/order", method = RequestMethod.GET )
@@ -134,7 +189,7 @@ public class AdminController {
             order = orderDAOImplement.getOrder( orderID );
         if ( order == null ) {
             System.out.println("Not found order with orderID : " + orderID + " and is redirecting to order_list page....." );
-            return "redirect:/order_list";
+            return "404";
         }
         modelMap.addAttribute( "order", order );
         modelMap.addAttribute( "cartForm", Utils.getCartInSession( request ) );

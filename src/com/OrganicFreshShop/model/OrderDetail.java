@@ -94,8 +94,9 @@ public class OrderDetail {
 
     @Override
     public String toString() {
-        return "[ Order detail : " + this.id + " ," + this.productCode + " ,"
-                + this.productName + " ," + this.orderCode + " ," + this.quantity + " ," +
-                this.price + " ," + this.amount + " ]";
+        return "[ Order detail : " + " id : " + this.id + " , product ID : " + this.productCode +
+                " , product name : " + this.productName + " , order ID :" + this.orderCode +
+                " , quantity : " + this.quantity + " , price : " + this.price +
+                " , sub-amount : " + this.amount + " ]";
     }
 }

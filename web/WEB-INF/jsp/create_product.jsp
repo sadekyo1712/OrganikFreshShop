@@ -19,7 +19,7 @@
 <div class="single_top">
     <div class="container">
         <div class="register">
-            <form:form name="create_product" action="${pageContext.request.contextPath}/create_product"
+            <form:form name="create_product" action="${pageContext.request.contextPath}/create_product?user_name=${pageContext.request.userPrincipal.name}"
                        method="post" modelAttribute="productForm">
                 <div class="register-top-grid">
                     <h3>TẠO SẢN PHẨM MỚI</h3>
@@ -33,50 +33,57 @@
                             <form:hidden path="code"/>${productForm.code}
                         </c:if>
                         <c:if test="${empty productForm.code}">
-                            <form:input path="code"/>
+                            <form:input path="code" required="true" placeholder="Ex: 1234-5678-9011"/>
                         </c:if>
                         <span><form:errors path="code"/></span>
                     </div>
                     <div>
                         <span>Tên sản phẩm<label>*</label></span>
                         <c:if test="${not empty productForm.name}">
-                            <form:input path="name" placeholder="${productForm.name}"/>
+                            <form:input path="name" placeholder="${productForm.name}" required="true"/>
                         </c:if>
                         <c:if test="${empty productForm.name}">
-                            <form:input path="name"/>
+                            <form:input path="name" required="true" placeholder="Ex: Bưởi năm roi"/>
                         </c:if>
                         <span><form:errors path="name"/></span>
                     </div>
                     <div>
                         <span>Giá sản phẩm<label>*</label></span>
                         <c:if test="${not empty productForm.priceTag}">
-                            <form:input path="priceTag" placeholder="${productForm.priceTag}"/>
+                            <form:input path="priceTag" placeholder="${productForm.priceTag}" required="true"/>
                         </c:if>
                         <c:if test="${empty productForm.priceTag}">
-                            <form:input path="priceTag"/>
+                            <form:input path="priceTag" required="true" placeholder="Ex: 100000"/>
                         </c:if>
                         <span><form:errors path="priceTag"/></span>
                     </div>
                     <div>
                         <span>Mô tả sản phẩm<label>*</label></span>
                         <c:if test="${not empty productForm.description}">
-                            <form:textarea path="description" rows="2" cols="30" placeholder="${productForm.description}"/>
+                            <form:textarea path="description" rows="2" cols="30"
+                                           placeholder="${productForm.description}" required="true"/>
                         </c:if>
                         <c:if test="${empty productForm.description}">
-                            <form:textarea path="description" rows="2" cols="30"/>
+                            <form:textarea path="description" rows="2" cols="30" required="true"
+                                           placeholder="Ex : Mô tả thông tin chi tiết của sản phẩm"/>
                         </c:if>
                     </div>
                     <div>
                         <span>Hình ảnh sản phẩm</span>
-                        <img src="${productForm.uri}" width="200" height="200"/>
+                        <c:if test="${not empty productForm.uri}">
+                            <img src="${productForm.uri}" width="200" height="200"/>
+                        </c:if>
+                        <c:if test="${empty productForm.uri}">
+                            <img src="<c:url value="/resources/images/spring.jpg"/>" width="376" height="200"/>
+                        </c:if>
                     </div>
                     <div>
                         <span>URI sản phẩm</span>
                         <c:if test="${not empty productForm.uri}">
-                            <form:input path="uri" placeholder="${productForm.uri}"/>
+                            <form:input path="uri" value="${productForm.uri}"/>
                         </c:if>
                         <c:if test="${empty productForm.uri}">
-                            <form:input path="uri"/>
+                            <form:input path="uri" value="/resources/images/spring.jpg"/>
                         </c:if>
                     </div>
                     <div class="register-but">

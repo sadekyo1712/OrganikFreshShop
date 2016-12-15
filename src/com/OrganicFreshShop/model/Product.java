@@ -20,6 +20,7 @@ public class Product {
     private Timestamp timestamp;
     private String description;
     private String uri;
+    private String createdAccount;
 
     public Product() {
 
@@ -116,6 +117,14 @@ public class Product {
 
     public void setTimestamp(Timestamp timestamp) {
         this.timestamp = timestamp;
+    }
+
+    public String getCreatedAccount() {
+        return createdAccount;
+    }
+
+    public void setCreatedAccount(String createdAccount) {
+        this.createdAccount = createdAccount;
     }
 
     @Override

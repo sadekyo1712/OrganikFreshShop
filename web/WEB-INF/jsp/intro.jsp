@@ -15,11 +15,11 @@
 <jsp:include page="header.jsp"/>
 
 <%--intro--%>
-<div class="single_top">
+<div class="single_top_intro">
     <div class="container">
         <div class="error-404 text-center">
-            <h1>Load...90%</h1>
-            <p>Đang hoàn thiện.....</p>
+            <h6>_____________________</h6>
+            <p>Đang hoàn thiện.....[90%]</p>
             <a class="b-home" href="${pageContext.request.contextPath}/index">Quay lại trang chủ nhé :)</a>
         </div>
     </div>

@@ -8,6 +8,7 @@ public class Account {
     public static final String ROLE_EMPLOYEE = "EMPLOYEE";
     public static final String ROLE_MANAGER = "MANAGER";
     public static final String ROLE_SUPPLIER = "SUPPLIER";
+    public static final String ROLE_USER = "USER";
 
     private String username;
     private String password;

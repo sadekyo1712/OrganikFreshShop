@@ -5,6 +5,8 @@ import com.OrganicFreshShop.mapper.AccountMapper;
 import com.OrganicFreshShop.model.Account;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.sql.DataSource;
 
@@ -15,11 +17,13 @@ public class AccountDAOImplement implements AccountDAO {
 
     private DataSource dataSource;
     private JdbcTemplate jdbcTemplate;
+    private PasswordEncoder encoder;
 
     @Autowired
     public AccountDAOImplement( DataSource dataSource ) {
         this.dataSource = dataSource;
         jdbcTemplate = new JdbcTemplate( dataSource );
+        encoder = new BCryptPasswordEncoder();
     }
 
     @Override
@@ -38,46 +42,80 @@ public class AccountDAOImplement implements AccountDAO {
     }
 
     @Override
-    public void createAccount( Account account ) {
+    public boolean createAccount( Account account ) {
         String SQL_INSERT_ACCOUNT_USER =
                 "insert into Account( User_Name, Active, Password, User_Role, Name, Address, Email, Phone )" +
-                "values ( ?, 1, ?, 'USER', ?, ?, ?, ? )";
+                "values ( ?, ?, ?, ?, ?, ?, ?, ? )";
+        String username = account.getUsername();
+        Account accountTemp = null;
+        accountTemp = this.fetchAccount( username );
+        if ( accountTemp != null )
+            return false;
+        try {
+            jdbcTemplate.update( SQL_INSERT_ACCOUNT_USER,
+                    account.getUsername(),
+                    account.isActive(),
+                    encoder.encode( account.getPassword() ),
+                    account.getUserRole(),
+                    account.getName(),
+                    account.getAddress(),
+                    account.getEmail(),
+                    account.getPhone() );
+            System.out.println("Create account :" + account + " successfully !");
+        } catch ( Exception ex ) {
+            System.out.println("Error when create Account in createAccount()");
+            ex.printStackTrace();
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public boolean updateAccount( Account account ) {
+
         String SQL_UPDATE_ACCOUNT_USER =
                 "update Account " +
-                "set User_Name = ?, Active = ?, Password = ?, User_Role = ?, Name = ?, Address = ?, Email = ?, Phone = ? " +
+                "set Active = ?, Password = ?, User_Role = ?, Name = ?, Address = ?, Email = ?, Phone = ? " +
                 "where User_Name = ?";
         String username = account.getUsername();
         Account accountTemp = null;
         accountTemp = this.fetchAccount( username );
-        if ( accountTemp != null ) {
-            try {
-                jdbcTemplate.update( SQL_UPDATE_ACCOUNT_USER,
-                        account.getUsername(),
-                        account.isActive(),
-                        account.getPassword(),
-                        account.getUserRole(),
-                        account.getName(),
-                        account.getAddress(),
-                        account.getEmail(),
-                        account.getPhone(),
-                        username );
-                System.out.println("Update account :" + account + " successfully");
-            } catch ( Exception ex ) {
-                System.out.println("Error when update account in create account");
-            }
-        } else {
-            try {
-                jdbcTemplate.update( SQL_INSERT_ACCOUNT_USER,
-                        account.getUsername(),
-                        account.getPassword(),
-                        account.getName(),
-                        account.getAddress(),
-                        account.getEmail(),
-                        account.getPhone() );
-                System.out.println("Create account :" + account + " successfully !");
-            } catch ( Exception ex ) {
-                System.out.println("Error when create Account in createAccount()");
-            }
+        if ( accountTemp == null )
+            return false;
+        try {
+            jdbcTemplate.update( SQL_UPDATE_ACCOUNT_USER,
+                    account.isActive(),
+                    encoder.encode( account.getPassword() ),
+                    account.getUserRole(),
+                    account.getName(),
+                    account.getAddress(),
+                    account.getEmail(),
+                    account.getPhone(),
+                    username );
+            System.out.println("Update account :" + account + " successfully");
+        } catch ( Exception ex ) {
+            System.out.println("Error when update account in create account");
+            ex.printStackTrace();
+            return false;
         }
+        return true;
+    }
+
+    @Override
+    public boolean deleteAccount(String username) {
+        String SQL_DELETE_ACCOUNT_ASSOCIATE_PRODUCT = "delete from Products where Create_Account = ?";
+        String SQL_DELETE_ACCOUNT = "delete from Account where User_Name = ?";
+        Account account = this.fetchAccount( username );
+        if ( account == null )
+            return false;
+        try {
+            jdbcTemplate.update( SQL_DELETE_ACCOUNT_ASSOCIATE_PRODUCT, username );
+            jdbcTemplate.update( SQL_DELETE_ACCOUNT, username );
+        } catch ( Exception ex ) {
+            System.out.println( "Error when delete account" );
+            ex.printStackTrace();
+            return false;
+        }
+        return true;
     }
 }

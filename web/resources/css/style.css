@@ -1412,6 +1412,38 @@ select.item_Size {
 .single_top {
 	margin:3em 0;
 }
+.single_top_404 {
+	margin:3em 0;
+	background: url("../images/404.svg") 540px 180px no-repeat;
+}
+.single_top_403 {
+	margin:3em 0;
+	background: url("../images/single_top.jpg") center no-repeat;
+	background-size: 533px 400px ;
+}
+.single_top_empty {
+	margin:3em 0;
+	background: url("../images/single_top2.png") #f7f7f7 500px 153px no-repeat;
+	background-size: 533px 400px ;
+}
+.single_top_not_found {
+	margin:3em 0;
+	background: url("../images/single_top.png") 560px 153px no-repeat;
+	background-size: 400px 300px ;
+}
+.single_top_error {
+	margin:3em 0;
+	background: url("../images/404_3.jpg");
+}
+.single_top_intro {
+	margin:3em 0;
+	background: url("../images/single_top2.gif") #f7f7f7 360px 50px no-repeat;
+}
+.single_top_successful {
+	margin:3em 0;
+	background: url("../images/single_top.gif") #f7f7f7 495px 135px no-repeat;
+	background-size: 533px 400px ;
+}
 ul.back{
 	padding:0;
 	list-style:none;
@@ -1883,7 +1915,7 @@ h3.m_2{
 }
 /*--404--*/
 .error-404{
-	min-height:500px;
+	min-height:550px;
 }
 .error-message{
 	color:#f54d56;
@@ -1894,6 +1926,18 @@ h3.m_2{
   font-weight: 700;
   color:#f54d56;
   text-transform: uppercase;
+}
+.error-404 h2 {
+	font-size: 5em;
+	font-weight: normal;
+	color:#f54d56;
+	text-transform: uppercase;
+}
+.error-404 h6 {
+	font-size: 2em;
+	font-weight: normal;
+	color:#f54d56;
+	text-transform: uppercase;
 }
 .error-404 p {
   color: #4f4844;
@@ -2086,6 +2130,13 @@ a.b-home:hover{
 	font-size:0.8125em;
 	padding:10px;
 }
+.login-right input[type="password"] {
+	border: 1px solid #DDDBDB;
+	outline-color:#fb4d01;
+	width: 96%;
+	font-size:0.8125em;
+	padding:10px;
+}
 .login-right input[type="submit"] {
 	background: #f54d56;
 	color: #FFF;
@@ -2144,6 +2195,13 @@ p.cart {
 	margin: 0;
 	font-weight:600;
 }
+.register-top-grid h6, .register-bottom-grid h6 {
+	color: #4bc6a4;
+	font-size: 1em;
+	padding-bottom: 5px;
+	margin: 0;
+	font-weight:600;
+}
 .register-top-grid div, .register-bottom-grid div {
 	width: 48%;
 	float: left;
@@ -2156,6 +2214,36 @@ p.cart {
 	display: block;
 }
 .register-top-grid input[type="text"], .register-bottom-grid input[type="text"] {
+	border: 1px solid #EEE;
+	outline-color:#FF5B36;
+	width: 96%;
+	font-size: 1em;
+	padding: 0.5em;
+}
+.register-top-grid input[type="password"], .register-bottom-grid input[type="password"] {
+	border: 1px solid #EEE;
+	outline-color:#FF5B36;
+	width: 96%;
+	font-size: 1em;
+	padding: 0.5em;
+}
+.register-top-grid select, .register-bottom-grid select {
+	border: 1px solid #EEE;
+	outline-color:#FF5B36;
+	background: #ffffff;
+	width: 96%;
+	font-size: 1em;
+	padding: 0.5em;
+}
+.register-top-grid textarea, .register-bottom-grid textarea {
+	border: 1px solid #EEE;
+	outline-color:#FF5B36;
+	background: #ffffff;
+	width: 96%;
+	font-size: 1em;
+	padding: 0.5em;
+}
+.register-top-grid input[type="email"], .register-bottom-grid input[type="email"] {
 	border: 1px solid #EEE;
 	outline-color:#FF5B36;
 	width: 96%;

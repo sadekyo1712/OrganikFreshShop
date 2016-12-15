@@ -28,8 +28,8 @@
         <div class="col-md-9 w_content">
             <%--old class women--%>
             <div class="w_nav">
-                <a href="${pageContext.request.contextPath}/product_list">
-                    <h4>---------------------------------------> Danh mục sản phẩm - <span>${totalProduct} sản phẩm &nbsp;</span>
+                <a href="${pageContext.request.contextPath}/supplier_product_list?user_name=${pageContext.request.userPrincipal.name}">
+                    <h4>------------------------------------------> Sản phẩm đã tạo - <span>${totalProduct} sản phẩm &nbsp;</span>
                         <c:if test="${paginatorProduct.totaLPage == 1}">
                             ---------------
                         </c:if>
@@ -40,7 +40,7 @@
                             <c:if test="${paginatorProduct.totaLPage > 1}">
                                 <c:forEach items="${paginatorProduct.navigateBar}" var="page">
                                     <c:if test="${page != -1}">
-                                        <a href="${pageContext.request.contextPath}/product_list?page=${page}&name=${pageContext.request.getParameter("name")}">${page} </a>|
+                                        <a href="${pageContext.request.contextPath}/supplier_product_list?user_name=${pageContext.request.userPrincipal.name}&page=${page}">${page} </a>|
                                     </c:if>
                                     <c:if test="${page == -1}">
                                         <span>... |</span>
@@ -65,91 +65,8 @@
             </div>
 
             <c:forEach items="${paginatorProduct.list}" var="product" varStatus="status">
-                <c:if test="${ status.index == 0 }">
-                    <div class="grids_of_4">
-                        <div class="grid1_of_4 simpleCart_shelfItem">
-                            <div class="content_box">
-                                <a href="${pageContext.request.contextPath}/product_info?code=${product.code}">
-                                    <div class="view view-fifth">
-                                        <img src="<c:url value="${product.uri}" />" class="img-responsive" alt=""/>
-                                        <div class="mask1">
-                                            <div class="info"></div>
-                                        </div>
-                                </a>
-                            </div>
-                            <h5>
-                                <a href="${pageContext.request.contextPath}/product_info?code=${product.code}">${product.name}</a>
-                            </h5>
-                            <h6>
-                                Thuế GTGT: 10%<br>
-                                Mã sản phẩm : ${product.code}
-                            </h6>
-                            <div class="size_1">
-                                <span class="item_price"><format:formatNumber value="${product.priceTag}" currencySymbol="VNĐ" type="currency"/></span>
-                                <div class="clearfix"></div>
-                            </div>
-                            <div class="size_2">
-                                <div>Qty : <input type="text" class="item_quantity quantity_1" value="1"/> kg</div>
-                                <div class="size_2-left">
-                                    <a href="${pageContext.request.contextPath}/buy_product?code=${product.code}">
-                                        <input type="button" class="item_add add3" value=""/>
-                                    </a>
-                                </div>
-                                <%--<div class="size_2-right">--%>
-                                    <%--<security:authorize access="hasAnyRole('ROLE_MANAGER')">--%>
-                                        <%--<a href="${pageContext.request.contextPath}/product_admin?code=${product.code}">--%>
-                                            <%--<input type="button" class="item_add edit3" value=""/>--%>
-                                        <%--</a>--%>
-                                    <%--</security:authorize>--%>
-                                <%--</div>--%>
-                                <div class="clearfix"></div>
-                            </div>
-                        </div>
-                    </div>
-                </c:if>
-                <c:if test="${ ( status.index != 0 ) && ( ( status.index % 4 ) == 0 ) }">
-                    <div class="clearfix"></div>
-                    </div>
-                    <div class="grids_of_4">
-                        <div class="grid1_of_4 simpleCart_shelfItem">
-                            <div class="content_box">
-                                <a href="${pageContext.request.contextPath}/product_info?code=${product.code}">
-                                    <div class="view view-fifth">
-                                        <img src="<c:url value="${product.uri}" />" class="img-responsive" alt=""/>
-                                        <div class="mask1">
-                                            <div class="info"></div>
-                                        </div>
-                                </a>
-                            </div>
-                            <h5><a href="${pageContext.request.contextPath}/product_info?code=${product.code}">${product.name}</a></h5>
-                            <h6>
-                                Thuế GTGT: 10%<br>
-                                Mã sản phẩm : ${product.code}
-                            </h6>
-                            <div class="size_1">
-                                <span class="item_price"><format:formatNumber value="${product.priceTag}" currencySymbol="VNĐ" type="currency"/></span>
-                                <div class="clearfix"></div>
-                            </div>
-                            <div class="size_2">
-                                <div>Qty : <input type="text" class="item_quantity quantity_1" value="1"/> kg</div>
-                                <div class="size_2-left">
-                                    <a href="${pageContext.request.contextPath}/buy_product?code=${product.code}">
-                                        <input type="button" class="item_add add3" value=""/>
-                                    </a>
-                                </div>
-                                <%--<div class="size_2-right">--%>
-                                    <%--<security:authorize access="hasAnyRole('ROLE_MANAGER')">--%>
-                                        <%--<a href="${pageContext.request.contextPath}/product_admin?code=${product.code}">--%>
-                                            <%--<input type="button" class="item_add edit3" value=""/>--%>
-                                        <%--</a>--%>
-                                    <%--</security:authorize>--%>
-                                <%--</div>--%>
-                                <div class="clearfix"></div>
-                            </div>
-                        </div>
-                    </div>
-                </c:if>
-                <c:if test="${( (status.index ) % 4 ) != 0}">
+            <c:if test="${ status.index == 0 }">
+                <div class="grids_of_4">
                     <div class="grid1_of_4 simpleCart_shelfItem">
                         <div class="content_box">
                             <a href="${pageContext.request.contextPath}/product_info?code=${product.code}">
@@ -160,7 +77,9 @@
                                     </div>
                             </a>
                         </div>
-                        <h5><a href="${pageContext.request.contextPath}/product_info?code=${product.code}">${product.name}</a></h5>
+                        <h5>
+                            <a href="${pageContext.request.contextPath}/product_info?code=${product.code}">${product.name}</a>
+                        </h5>
                         <h6>
                             Thuế GTGT: 10%<br>
                             Mã sản phẩm : ${product.code}
@@ -172,24 +91,105 @@
                         <div class="size_2">
                             <div>Qty : <input type="text" class="item_quantity quantity_1" value="1"/> kg</div>
                             <div class="size_2-left">
-                                <a href="${pageContext.request.contextPath}/buy_product?code=${product.code}">
-                                    <input type="button" class="item_add add3" value=""/>
+                                <a href="${pageContext.request.contextPath}/product_admin?code=${product.code}&user_name=${pageContext.request.userPrincipal.name}">
+                                    <input type="button" class="item_add edit3" value=""/>
                                 </a>
                             </div>
-                            <%--<div class="size_2-right">--%>
-                                <%--<security:authorize access="hasAnyRole('ROLE_MANAGER')">--%>
-                                    <%--<a href="${pageContext.request.contextPath}/product_admin?code=${product.code}">--%>
-                                        <%--<input type="button" class="item_add edit3" value=""/>--%>
-                                    <%--</a>--%>
-                                <%--</security:authorize>--%>
-                            <%--</div>--%>
+                            <div class="size_2-right">
+                                <security:authorize access="hasAnyRole('ROLE_MANAGER')">
+                                    <a href="${pageContext.request.contextPath}/product_admin?code=${product.code}">
+                                        <input type="button" class="item_add edit3" value=""/>
+                                    </a>
+                                </security:authorize>
+                            </div>
                             <div class="clearfix"></div>
                         </div>
                     </div>
                 </div>
-                </c:if>
-            </c:forEach>
-<div class="clearfix"></div>
+            </c:if>
+            <c:if test="${ ( status.index != 0 ) && ( ( status.index % 4 ) == 0 ) }">
+            <div class="clearfix"></div>
+        </div>
+        <div class="grids_of_4">
+            <div class="grid1_of_4 simpleCart_shelfItem">
+                <div class="content_box">
+                    <a href="${pageContext.request.contextPath}/product_info?code=${product.code}">
+                        <div class="view view-fifth">
+                            <img src="<c:url value="${product.uri}" />" class="img-responsive" alt=""/>
+                            <div class="mask1">
+                                <div class="info"></div>
+                            </div>
+                    </a>
+                </div>
+                <h5><a href="${pageContext.request.contextPath}/product_info?code=${product.code}">${product.name}</a></h5>
+                <h6>
+                    Thuế GTGT: 10%<br>
+                    Mã sản phẩm : ${product.code}
+                </h6>
+                <div class="size_1">
+                    <span class="item_price"><format:formatNumber value="${product.priceTag}" currencySymbol="VNĐ" type="currency"/></span>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="size_2">
+                    <div>Qty : <input type="text" class="item_quantity quantity_1" value="1"/> kg</div>
+                    <div class="size_2-left">
+                        <a href="${pageContext.request.contextPath}/product_admin?code=${product.code}&user_name=${pageContext.request.userPrincipal.name}">
+                            <input type="button" class="item_add edit3" value=""/>
+                        </a>
+                    </div>
+                    <div class="size_2-right">
+                        <security:authorize access="hasAnyRole('ROLE_MANAGER')">
+                            <a href="${pageContext.request.contextPath}/product_admin?code=${product.code}">
+                                <input type="button" class="item_add edit3" value=""/>
+                            </a>
+                        </security:authorize>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+        </c:if>
+        <c:if test="${( (status.index ) % 4 ) != 0}">
+        <div class="grid1_of_4 simpleCart_shelfItem">
+            <div class="content_box">
+                <a href="${pageContext.request.contextPath}/product_info?code=${product.code}">
+                    <div class="view view-fifth">
+                        <img src="<c:url value="${product.uri}" />" class="img-responsive" alt=""/>
+                        <div class="mask1">
+                            <div class="info"></div>
+                        </div>
+                </a>
+            </div>
+            <h5><a href="${pageContext.request.contextPath}/product_info?code=${product.code}">${product.name}</a></h5>
+            <h6>
+                Thuế GTGT: 10%<br>
+                Mã sản phẩm : ${product.code}
+            </h6>
+            <div class="size_1">
+                <span class="item_price"><format:formatNumber value="${product.priceTag}" currencySymbol="VNĐ" type="currency"/></span>
+                <div class="clearfix"></div>
+            </div>
+            <div class="size_2">
+                <div>Qty : <input type="text" class="item_quantity quantity_1" value="1"/> kg</div>
+                <div class="size_2-left">
+                    <a href="${pageContext.request.contextPath}/product_admin?code=${product.code}&user_name=${pageContext.request.userPrincipal.name}">
+                        <input type="button" class="item_add edit3" value=""/>
+                    </a>
+                </div>
+                <div class="size_2-right">
+                    <security:authorize access="hasAnyRole('ROLE_MANAGER')">
+                        <a href="${pageContext.request.contextPath}/product_admin?code=${product.code}">
+                            <input type="button" class="item_add edit3" value=""/>
+                        </a>
+                    </security:authorize>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+    </c:if>
+    </c:forEach>
+    <div class="clearfix"></div>
 </div>
 </div>
 

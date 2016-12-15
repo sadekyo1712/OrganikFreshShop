@@ -13,12 +13,14 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * Created by root on 11/23/16.
@@ -56,7 +58,22 @@ public class MainController {
         }
     }
 
-    @RequestMapping( value = "/index")
+//    @RequestMapping( value = "/empty")
+//    public String empty() {
+//        return "empty";
+//    }
+//
+//    @RequestMapping( value = "/notfound")
+//    public String notFound() {
+//        return "not_found";
+//    }
+//
+//    @RequestMapping( value = "successful")
+//    public String succ() {
+//        return "successful";
+//    }
+
+   @RequestMapping( value = "/index")
     public String home( ModelMap modelMap, HttpServletRequest request ) {
         System.out.println("In Homepage");
         List<Product> list;
@@ -132,8 +149,10 @@ public class MainController {
      * @return
      */
     @RequestMapping( value = "/register", method = RequestMethod.GET )
-    public String registerPage( ModelMap modelMap, HttpServletRequest request ) {
+    public String registerPage( ModelMap modelMap, HttpServletRequest request,
+                                @RequestParam( value = "message", defaultValue = "") String message ) {
         modelMap.addAttribute( "account", new Account() );
+        modelMap.addAttribute( "message", message );
         modelMap.addAttribute( "cartForm", Utils.getCartInSession( request ) );
         System.out.println("In register HTTP_GET page");
         return "register";
@@ -148,10 +167,12 @@ public class MainController {
     @RequestMapping( value = "/register", method = RequestMethod.POST )
     public String addAccount( ModelMap modelMap, HttpServletRequest request,
                               @ModelAttribute( "account" ) Account account ) {
-        accountDAOImplement.createAccount( account );
+        boolean isExist = !( accountDAOImplement.createAccount( account ) );
         modelMap.addAttribute( "cartForm", Utils.getCartInSession( request ) );
+        if ( isExist )
+            return "redirect:/register?message=" + "Tài khoản đã tồn tại" ;
         System.out.println("In register HTTP_POST and is redirecting to home page....");
-        return "redirect:/login";
+        return "successful";
     }
 
     /**
@@ -170,7 +191,7 @@ public class MainController {
     public String logout( ModelMap modelMap, HttpServletRequest request ) {
         System.out.println("Logout and redirect to homepage");
         modelMap.addAttribute( "cartForm", Utils.getCartInSession( request ) );
-        return "/index";
+        return "successful";
     }
 
     @RequestMapping( value = "/product_list")
@@ -184,17 +205,18 @@ public class MainController {
         PaginatorResult<Product> result =
                 productDAOImplement.findAllProductMatchNamePatternPaginatorResult( page, maxResult,
                         maxNavigationPage, searchName );
+        modelMap.addAttribute( "cartForm", Utils.getCartInSession( request ) );
+        if ( result == null )
+            return "not_found";
         int totalProduct = result.getTotalRecord();
         modelMap.addAttribute( "paginatorProduct", result );
         modelMap.addAttribute( "totalProduct", totalProduct );
-        modelMap.addAttribute( "cartForm", Utils.getCartInSession( request ) );
         System.out.println("Product list : " + result + "\n\n");
         return "product_list";
     }
 
     @RequestMapping( value = "/create_product", method = RequestMethod.GET )
-    public String createProduct( ModelMap modelMap,
-                                 HttpServletRequest request) {
+    public String createProduct( ModelMap modelMap, HttpServletRequest request ) {
 
         modelMap.addAttribute( "productForm", new Product() );
         modelMap.addAttribute( "cartForm", Utils.getCartInSession( request ) );
@@ -204,12 +226,15 @@ public class MainController {
 
     @RequestMapping( value = "/create_product", method = RequestMethod.POST )
     public String createProduct( ModelMap modelMap, HttpServletRequest request,
+                                 @RequestParam( value = "user_name") String username,
                                  @ModelAttribute( "productForm" ) @Validated Product product,
                                  BindingResult bindingResult ) {
         if ( bindingResult.hasErrors() ) {
             System.out.println("Error when binding result");
             return "redirect:/create_product";
         }
+        product.setCode( UUID.randomUUID().toString() );
+        product.setCreatedAccount( username );
         try {
             productDAOImplement.saveProduct( product );
         } catch ( Exception ex ) {
@@ -220,7 +245,7 @@ public class MainController {
         }
         modelMap.addAttribute( "cartForm", Utils.getCartInSession( request ) );
         System.out.println("In create_product HTTP_POST and is redirecting to product_list");
-        return "redirect:/product_list";
+        return "redirect:/supplier_product_list?user_name=" + username ;
     }
 
     @RequestMapping( value = "/buy_product")
@@ -373,11 +398,11 @@ public class MainController {
             Utils.storeLastCartInSession( servletRequest, cart );
             System.out.println("In order_confirm HTTP_POST, order save successfully !");
             modelMap.addAttribute( "cartForm", Utils.getCartInSession( servletRequest ) );
-            return "redirect:/index";
+            return "successful";
         }
         modelMap.addAttribute( "cartForm", Utils.getCartInSession( servletRequest ) );
         System.out.println("Cart is not valid to save and is redirecting to checkout HTTP_GET page.......");
-        return "redirect:/index";
+        return "error";
     }
 
     @RequestMapping( value = "/productImage", method = RequestMethod.GET )

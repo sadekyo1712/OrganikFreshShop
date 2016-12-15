@@ -8,5 +8,7 @@ import com.OrganicFreshShop.model.Account;
 public interface AccountDAO {
 
     public Account fetchAccount( String username );
-    public void createAccount( Account account );
+    public boolean createAccount( Account account );
+    public boolean updateAccount( Account account );
+    public boolean deleteAccount( String username );
 }

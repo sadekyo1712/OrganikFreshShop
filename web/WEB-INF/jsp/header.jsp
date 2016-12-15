@@ -65,7 +65,10 @@
                         </a>
                         &nbsp;quay trở lại với OrganikShop&nbsp;|&nbsp;
                     </li>
-
+                    <li>
+                        <a href="${pageContext.request.contextPath}/account_change_info?user_name=${pageContext.request.userPrincipal.name}">
+                            Thay đổi thông tin tài khoản</a>&nbsp;|&nbsp;
+                    </li>
                     <li>
                         <a href="${pageContext.request.contextPath}/logout">Đăng xuất</a>
                     </li>
@@ -93,6 +96,9 @@
                     <li>
                         Nhà cung cấp :
                         <a href="${pageContext.request.contextPath}/create_product"> thêm sản phẩm mới</a>&nbsp;&nbsp;|&nbsp;
+                    </li>
+                    <li>
+                        <a href="${pageContext.request.contextPath}/supplier_product_list?user_name=${pageContext.request.userPrincipal.name}"> xem sản phẩm đã tạo</a>&nbsp;&nbsp;|&nbsp;
                     </li>
                 </security:authorize>
             </ul>
@@ -215,10 +221,14 @@
                 <p class="empty"><a href="${pageContext.request.contextPath}/empty_cart" class="simpleCart_empty">Làm trống giỏ hàng</a></p>
                 <div class="clearfix"></div>
             </div>
-            <div class="search">
-                <input type="text" name="s" class="textbox" value="Tìm kiếm" onfocus="this.value = '';"
-                       onblur="if (this.value == '') {this.value = 'Tìm kiếm';}">
-                <input type="submit" value="Subscribe" id="submit" name="submit">
+                <form action="${pageContext.request.contextPath}/product_list" method="get">
+                    <div class="search">
+                        <input title="hãy dùng tôi để tìm kiếm sản phẩm :)" type="text" name="name" class="textbox" value="Tìm kiếm"
+                               onfocus="this.value = '';"
+                               onblur="if (this.value == '') {this.value = 'Tìm kiếm';}">
+                        <input type="submit">
+                    </div>
+                </form>
                 <div id="response"></div>
             </div>
             <div class="clearfix"></div>

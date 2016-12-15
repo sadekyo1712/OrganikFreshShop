@@ -32,11 +32,11 @@
                 <form method="post" action="${pageContext.request.contextPath}/j_spring_security_check">
                     <div>
                         <span>Tên đăng nhập hoặc địa chỉ email<label>*</label></span>
-                        <input type="text" name="username"/>
+                        <input type="text" name="username" required/>
                     </div>
                     <div>
                         <span>Mật khẩu<label>*</label></span>
-                        <input type="text" name="password"/>
+                        <input type="password" name="password" required/>
                     </div>
                     <a class="forgot" href="${pageContext.request.contextPath}/intro">Bạn quên mật khẩu ?</a>
                     <input type="submit" value="Đăng nhập"/>

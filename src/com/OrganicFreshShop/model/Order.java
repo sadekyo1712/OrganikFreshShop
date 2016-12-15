@@ -109,8 +109,11 @@ public class Order {
 
     @Override
     public String toString() {
-        return "[ Order : " + this.id + " ," + this.orderDate + " ," + this.orderNumber + " ," + this.amount
-                + " ," + this.customerName + " ," + this.customerPhone + " ," + this.customerEmail +
-                " ," + this.customerAddress + " ," + this.orderDetails + " ]";
+        return "[ Order : " + " id : " + this.id + " , order created date : " + this.orderDate +
+                " , order number : " + this.orderNumber + " , total amount : " + this.amount +
+                " , customer name : " + this.customerName + " , customer phone : " + this.customerPhone +
+                " , customer email : " + this.customerEmail +
+                " , customer address : " + this.customerAddress +
+                " , order detail : " + this.orderDetails + " ]";
     }
 }

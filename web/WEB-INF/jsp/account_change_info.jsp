@@ -18,31 +18,28 @@
 <div class="single_top">
     <div class="container">
         <div class="register">
-            <form:form name="account" action="/register" method="post" modelAttribute="account">
+            <form:form name="account" action="/account_change_info" method="post" modelAttribute="account">
                 <div class="register-bottom-grid">
                     <h3>THÔNG TIN ĐĂNG NHẬP</h3>
-                    <c:if test="${message.length() > 0}">
-                        <h6>* Tài khoản đã tồn tại</h6>
-                    </c:if>
                     <div>
-                        <span>User name<label>*</label></span>
-                        <form:input path="username" required="true"/>
+                        <span>Tên đăng nhập</span>
+                        <form:hidden path="username"/>${account.username}
                     </div>
                     <div>
-                        <span>Mật khẩu<label>*</label></span>
-                        <form:input type="password" path="password" required="true"/>
+                        <span>Mật khẩu</span>
+                        <form:input type="password" path="password" placeholder="${account.password}" required="true"/>
                     </div>
                     <div>
                         <span>Loại tài khoản</span>
                         <form:select path="userRole">
-                            <form:option value="USER">Người dùng thông thường</form:option>
-                            <form:option value="SUPPLIER">Nhà cung cấp sản phẩm</form:option>
+                            <form:option value="USER">USER</form:option>
+                            <form:option value="SUPPLIER">SUPPLIER</form:option>
                         </form:select>
                     </div>
                     <div>
                         <span>Trạng thái tài khoản</span>
                         <form:select path="active">
-                            <form:option value="true">KÍCH HOẠT</form:option>
+                            <form:option value="true">HOẠT ĐỘNG</form:option>
                             <form:option value="false">VÔ HIỆU HÓA</form:option>
                         </form:select>
                     </div>
@@ -50,20 +47,23 @@
                 <div class="register-top-grid">
                     <h3>THÔNG TIN CÁ NHÂN</h3>
                     <div>
-                        <span>Tên tài khoản<label>*</label></span>
-                        <form:input path="name" required="true"/>
+                        <span>Tên tài khoản</span>
+                        <form:input path="name" placeholder="${account.name}" required="true"/>
                     </div>
                     <div>
-                        <span>Số điện thoại<label>*</label></span>
-                        <form:input path="phone" required="true"/>
+                        <span>Số điện thoại</span>
+                        <form:input path="phone" placeholder="${account.phone}" required="true"/>
                     </div>
                     <div>
-                        <span>Địa chỉ<label>*</label></span>
-                        <form:input path="address" required="true"/>
+                        <span>Địa chỉ</span>
+                        <form:input path="address" placeholder="${account.address}" required="true"/>
                     </div>
                     <div>
-                        <span>Email<label>*</label></span>
-                        <form:input path="email" required="true" type="email"/>
+                        <span>Email</span>
+                        <form:input type="email" path="email" placeholder="${account.email}" required="true"/>
+                    </div>
+                    <div>
+                        <span>* Đăng nhập lại tài khoản "${pageContext.request.userPrincipal.name}" để cập nhật việc thay đổi cấu hình</span>
                     </div>
                     <div class="clearfix"></div>
                     <a class="news-letter" href="${pageContext.request.contextPath}/intro">
@@ -73,8 +73,8 @@
                 </div>
                 <div class="clearfix"></div>
                 <div class="register-but">
-                        <input type="submit" value="Hoàn thành đăng ký"/>
-                        <div class="clearfix"></div>
+                    <input type="submit" value="Cập nhật thông tin tài khoản"/>
+                    <div class="clearfix"></div>
                 </div>
             </form:form>
         </div>

@@ -52,7 +52,7 @@
                                             <p>Giá tiền : <format:formatNumber value="${cartEntry.product.priceTag}" type="currency"/></p>
                                         </li>
                                         <li>
-                                            <p>Số lượng : <form:input path="cartEntriesProducts[${varStatus.index}].quantity" size="1"/></p>
+                                            <p>Số lượng : <form:input path="cartEntriesProducts[${varStatus.index}].quantity" size="1" required="true"/></p>
                                         </li>
                                         <li>
                                             <p>Thành tiền : <format:formatNumber value="${cartEntry.amount}" type="currency"/></p>

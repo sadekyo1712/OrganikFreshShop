@@ -95,6 +95,6 @@ public class PaginatorResult<E> {
 
     @Override
     public String toString() {
-        return "[ Paginator result :\n-List : " + this.getList() + "\n-Nav bar : " + this.getNavigateBar() + "\n ]";
+        return "[ Paginator result :\nList : " + this.getList() + "\nNav bar : " + this.getNavigateBar() + "\n ]";
     }
 }

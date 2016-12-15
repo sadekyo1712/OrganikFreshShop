@@ -69,6 +69,31 @@ public class ProductDAOImplement implements ProductDAO {
     }
 
     @Override
+    public PaginatorResult<Product> fetchAllProductsCreatedByAccountPaginatorResult
+            (int page, int resultEachPage, int maxNavigationPage, String createAccount) {
+        String SQL_FETCH_PRODUCT_PAGINATOR =
+                "select * " +
+                "from Products " +
+                "where Create_Account = ? order by Name asc limit ?, ?";
+        String SQL_COUNT_TOTAL_RECORD =
+                "select count(*) " +
+                "from Products " +
+                "where Create_Account = ?";
+        int fromIndex = ( page - 1 ) * resultEachPage;
+        try {
+            List<Product> list = jdbcTemplate.query( SQL_FETCH_PRODUCT_PAGINATOR,
+                    new Object[]{ createAccount, fromIndex, resultEachPage }, new ProductMapper() );
+            int totalRecord = jdbcTemplate.queryForObject( SQL_COUNT_TOTAL_RECORD,
+                    new Object[]{ createAccount }, Integer.class );
+            return new PaginatorResult<>( page, resultEachPage, maxNavigationPage, list, totalRecord ) ;
+        } catch ( Exception ex ) {
+            System.out.println("Error when fetch product created by account : " + createAccount );
+            ex.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
     public List<Product> fetchAllProducts() {
         String SQL_FETCH_ALL_PRODUCT = "select * from Products order by Name asc";
         try {
@@ -136,9 +161,9 @@ public class ProductDAOImplement implements ProductDAO {
     }
 
     @Override
-    public void saveProduct(Product productForm) {
+    public boolean saveProduct(Product productForm) {
         if ( productForm == null )
-            return;
+            return false;
         String code = productForm.getCode();
         Product product = null;
         boolean isNew = false;
@@ -157,15 +182,16 @@ public class ProductDAOImplement implements ProductDAO {
             product.setDescription( productForm.getDescription() );
             product.setUri( productForm.getUri() );
             product.setData( productForm.getData() );
+            product.setCreatedAccount( productForm.getCreatedAccount() );
         }
         try {
             if ( isNew ) {
                 String SQL_INSERT_NEW_PRODUCT =
-                        "insert into Products( Code, Create_Date, Image, Name, Price, Description, URI ) " +
-                        "values ( ?, ?, ?, ?, ?, ?, ? )";
-                jdbcTemplate.update( SQL_INSERT_NEW_PRODUCT, UUID.randomUUID().toString(), new Date(),
+                        "insert into Products( Code, Create_Date, Image, Name, Price, Description, URI, Create_Account ) " +
+                        "values ( ?, ?, ?, ?, ?, ?, ?, ? )";
+                jdbcTemplate.update( SQL_INSERT_NEW_PRODUCT, product.getCode(), new Date(),
                         product.getData(), product.getName(), product.getPriceTag(),
-                        product.getDescription(), product.getUri() );
+                        product.getDescription(), product.getUri(), product.getCreatedAccount() );
                 System.out.println( "Save product : " + product +" successfully ! " );
             } else {
                 String SQL_UPDATE_PRODUCT =
@@ -179,6 +205,13 @@ public class ProductDAOImplement implements ProductDAO {
         } catch ( Exception ex ) {
             System.out.println( "Error when insert or update product");
             ex.printStackTrace();
+            return false;
         }
+        return true;
+    }
+
+    @Override
+    public boolean deleteProduct(Product product) {
+        return false;
     }
 }

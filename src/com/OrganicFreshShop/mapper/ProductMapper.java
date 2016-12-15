@@ -23,6 +23,7 @@ public class ProductMapper implements RowMapper<Product> {
         product.setTimestamp( resultSet.getTimestamp("Create_Date") );
         product.setDescription( resultSet.getString("Description") );
         product.setUri( resultSet.getString("URI") );
+        product.setCreatedAccount( resultSet.getString("Create_Account") );
         return product;
     }
 }
