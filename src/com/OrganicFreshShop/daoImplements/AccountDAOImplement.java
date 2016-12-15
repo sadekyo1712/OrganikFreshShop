@@ -83,15 +83,27 @@ public class AccountDAOImplement implements AccountDAO {
         if ( accountTemp == null )
             return false;
         try {
-            jdbcTemplate.update( SQL_UPDATE_ACCOUNT_USER,
-                    account.isActive(),
-                    encoder.encode( account.getPassword() ),
-                    account.getUserRole(),
-                    account.getName(),
-                    account.getAddress(),
-                    account.getEmail(),
-                    account.getPhone(),
-                    username );
+            if ( account.getPassword().contains("$2a$10$") ) {
+                jdbcTemplate.update( SQL_UPDATE_ACCOUNT_USER,
+                        account.isActive(),
+                        account.getPassword(),
+                        account.getUserRole(),
+                        account.getName(),
+                        account.getAddress(),
+                        account.getEmail(),
+                        account.getPhone(),
+                        username );
+            } else {
+                jdbcTemplate.update( SQL_UPDATE_ACCOUNT_USER,
+                        account.isActive(),
+                        encoder.encode( account.getPassword() ),
+                        account.getUserRole(),
+                        account.getName(),
+                        account.getAddress(),
+                        account.getEmail(),
+                        account.getPhone(),
+                        username );
+            }
             System.out.println("Update account :" + account + " successfully");
         } catch ( Exception ex ) {
             System.out.println("Error when update account in create account");
